@@ -3,7 +3,6 @@ package com.example.SpringbootWebApp;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,18 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/employee")
 public class EmployeeRestController {
 
-    Employee[] employees =  {
-            new Employee("Bob", 1001),
-            new Employee("Rob", 2002),
-            new Employee("Mack", 2003),
-            new Employee("Jay", 4004),
-            new Employee("Smith", 5005),
-            new Employee("Harry", 6006),
-            new Employee("Will", 7007),
-            new Employee("Greg", 1008),
-            new Employee("Ian", 1009),
-            new Employee("Connor", 1010),
-
+   public static Employee[] employees =  {
+            new Employee("Bobby", "Wills",100011, "3742 White Oak Drive, Weston, Missouri"),
+            new Employee("Rob", "Moore", 200022, "44597 A Avenue, Edmonton, Alberta"),
+            new Employee("Mack","Mckinney", 200023, " 2659 boulevard des Laurentides, La Tuque, Quebec"),
+            new Employee("Jay", "York",400045, " 754 Birkett Lane, Brantford, Ontario"),
+            new Employee("Smith","Jennings", 500053, "1033 Weir Crescent, Toronto, Ontario"),
+            new Employee("Greg", "Larson",100083, "825 rue Saint-Charles, Longueuil, Quebec"),
     };
 
 
@@ -37,10 +31,20 @@ public class EmployeeRestController {
         return employee;
 
     }
-    @PostMapping("/listEmployees/name")
-    public String listEmployeesName() {
-        return null;
-
+    @GetMapping("/listEmployees/firstName")
+    public Employee listEmployeesFirstName(@PathVariable String firstName) {
+        Employee employee= employees[Integer.parseInt(firstName)];
+        return employee;
+    }
+    @GetMapping("/listEmployees/lastName")
+    public Employee listEmployeesLastName(@PathVariable String lastName) {
+        Employee employee= employees[Integer.parseInt(lastName)];
+        return employee;
+    }
+    @GetMapping("/listEmployees/address")
+    public Employee listEmployeesAddress(@PathVariable String address) {
+        Employee employee= employees[Integer.parseInt(address)];
+        return employee;
     }
 
 }
