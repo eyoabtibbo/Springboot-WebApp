@@ -1,14 +1,20 @@
 package com.example.SpringbootWebApp;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/employee")
 public class EmployeeRestController {
+
+    @Autowired
+    private EmployeeBusinessService businessService;
 
    public static Employee[] employees =  {
             new Employee("Bobby", "Wills",100011, "3742 White Oak Drive, Weston, Missouri"),
@@ -45,6 +51,11 @@ public class EmployeeRestController {
     public Employee listEmployeesAddress(@PathVariable String address) {
         Employee employee= employees[Integer.parseInt(address)];
         return employee;
+    }
+
+    @GetMapping("/employee-in-database")
+    public List<Employee> retrieveAllItems() {
+        return businessService.retrieveEmployeeInDatabase();
     }
 
 }

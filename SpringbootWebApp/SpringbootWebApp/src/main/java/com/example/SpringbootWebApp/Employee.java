@@ -1,12 +1,20 @@
 package com.example.SpringbootWebApp;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
+
+@Entity
 public class Employee {
+
+    @Id
     private String firstName;
     private String lastName;
     private int id;
     private String address;
 
-
+    @Transient
+    private String username;
 
     public Employee() {
 
@@ -44,5 +52,13 @@ public class Employee {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
