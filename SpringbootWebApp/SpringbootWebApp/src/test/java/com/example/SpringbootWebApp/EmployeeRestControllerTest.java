@@ -50,8 +50,6 @@ class EmployeeRestControllerTest {
                         .json(JSONArray.toJSONString(Arrays.asList(EmployeeRestController.employees))
 
                         ));
-
-
     }
 
 }

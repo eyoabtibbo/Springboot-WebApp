@@ -54,8 +54,8 @@ public class EmployeeRestController {
     }
 
     @GetMapping("/employee-in-database")
-    public List<Employee> retrieveAllItems() {
-        return businessService.retrieveEmployeeInDatabase();
+    public List<Employee> retrieveEmployee() {
+        return businessService.addUsernameForAllEmployees();
     }
 
 }

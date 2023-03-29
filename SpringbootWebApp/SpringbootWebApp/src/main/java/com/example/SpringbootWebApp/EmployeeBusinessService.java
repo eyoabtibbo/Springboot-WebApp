@@ -11,7 +11,7 @@ public class EmployeeBusinessService {
     @Autowired
     private EmployeeRepository repository;
 
-    public List <Employee> retrieveEmployeeInDatabase() {
+    public List <Employee> addUsernameForAllEmployees() {
         List<Employee> employees = repository.findAll();
         for(Employee employee:employees) {
             employee.setUsername(employee.getFirstName().concat(employee.getLastName()));
