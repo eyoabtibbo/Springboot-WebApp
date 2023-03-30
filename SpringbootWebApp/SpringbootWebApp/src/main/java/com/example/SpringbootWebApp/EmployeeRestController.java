@@ -20,6 +20,30 @@ public class EmployeeRestController {
     };
 
 
+public Employee getEmployeeId (int id) {
+    for(int i=0; i<employees.length ;i++) {
+        if (employees[i].getId()==id) {
+            return employees[i];
+        }
+    }
+    return null;
+};
+    public Employee getEmployeeByFirstName (String name) {
+        for(int i=0; i<employees.length ;i++) {
+            if ((employees[i].getFirstName()).equals(name)) {
+                return employees[i];
+            }
+        }
+        return null;
+    };
+    public Employee getEmployeeByLastName (String name) {
+        for(int i=0; i<employees.length ;i++) {
+            if ((employees[i].getLastName()).equals(name)) {
+                return employees[i];
+            }
+        }
+        return null;
+    };
     @GetMapping("/listEmployees")
     public Employee[] listEmployees() {
         return employees;
@@ -27,19 +51,16 @@ public class EmployeeRestController {
     }
     @GetMapping("/listEmployees/{id}")
     public Employee listEmployeesId(@PathVariable int id) {
-        Employee employee= employees[id];
-        return employee;
-
+        return getEmployeeId(id);
     }
-    @GetMapping("/listEmployees/firstName")
+    @GetMapping("/listEmployees/firstName={firstName}")
     public Employee listEmployeesFirstName(@PathVariable String firstName) {
-        Employee employee= employees[Integer.parseInt(firstName)];
-        return employee;
+        return getEmployeeByFirstName(firstName);
     }
-    @GetMapping("/listEmployees/lastName")
+
+    @GetMapping("/listEmployees/lastName={lastName}")
     public Employee listEmployeesLastName(@PathVariable String lastName) {
-        Employee employee= employees[Integer.parseInt(lastName)];
-        return employee;
+        return getEmployeeByLastName(lastName);
     }
     @GetMapping("/listEmployees/address")
     public Employee listEmployeesAddress(@PathVariable String address) {

@@ -37,10 +37,21 @@ class EmployeeRestControllerTest {
 
     @Test
     public void testSuccessEmployeeWithId() throws Exception {
-
-        mockMvc.perform(get("/employee/listEmployees/1"))
+        mockMvc.perform(get("/employee/listEmployees/100011"))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{\"firstName\":\"Rob\",\"lastName\":\"Moore\",\"id\":200022,\"address\":\"44597 A Avenue, Edmonton, Alberta\"}"));
+                .andExpect(content().json("{\"firstName\":\"Bobby\",\"lastName\":\"Wills\",\"id\":100011,\"address\":\"3742 White Oak Drive, Weston, Missouri\"}"));
+    }
+    @Test
+    public void testSuccessEmployeeWithFirstName() throws Exception {
+        mockMvc.perform(get("/employee/listEmployees/firstName=Bobby"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("{\"firstName\":\"Bobby\",\"lastName\":\"Wills\",\"id\":100011,\"address\":\"3742 White Oak Drive, Weston, Missouri\"}"));
+    }
+    @Test
+    public void testSuccessEmployeeWithLastName() throws Exception {
+        mockMvc.perform(get("/employee/listEmployees/lastName=Wills"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("{\"firstName\":\"Bobby\",\"lastName\":\"Wills\",\"id\":100011,\"address\":\"3742 White Oak Drive, Weston, Missouri\"}"));
     }
     @Test
     public void testSuccessEmployeeList() throws Exception {
@@ -48,7 +59,6 @@ class EmployeeRestControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content()
                         .json(JSONArray.toJSONString(Arrays.asList(EmployeeRestController.employees))
-
                         ));
 
 
