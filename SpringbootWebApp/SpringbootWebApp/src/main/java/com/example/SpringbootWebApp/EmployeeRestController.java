@@ -53,12 +53,12 @@ public Employee getEmployeeId (int id) {
     public Employee listEmployeesId(@PathVariable int id) {
         return getEmployeeId(id);
     }
-    @GetMapping("/listEmployees/firstName={firstName}")
+    @GetMapping("/listEmployees/firstname={firstName}")
     public Employee listEmployeesFirstName(@PathVariable String firstName) {
         return getEmployeeByFirstName(firstName);
     }
 
-    @GetMapping("/listEmployees/lastName={lastName}")
+    @GetMapping("/listEmployees/lastname={lastName}")
     public Employee listEmployeesLastName(@PathVariable String lastName) {
         return getEmployeeByLastName(lastName);
     }

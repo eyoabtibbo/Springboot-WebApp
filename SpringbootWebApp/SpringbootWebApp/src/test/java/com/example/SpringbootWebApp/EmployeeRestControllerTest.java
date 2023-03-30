@@ -43,13 +43,13 @@ class EmployeeRestControllerTest {
     }
     @Test
     public void testSuccessEmployeeWithFirstName() throws Exception {
-        mockMvc.perform(get("/employee/listEmployees/firstName=Bobby"))
+        mockMvc.perform(get("/employee/listEmployees/firstname=Bobby"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("{\"firstName\":\"Bobby\",\"lastName\":\"Wills\",\"id\":100011,\"address\":\"3742 White Oak Drive, Weston, Missouri\"}"));
     }
     @Test
     public void testSuccessEmployeeWithLastName() throws Exception {
-        mockMvc.perform(get("/employee/listEmployees/lastName=Wills"))
+        mockMvc.perform(get("/employee/listEmployees/lastname=Wills"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("{\"firstName\":\"Bobby\",\"lastName\":\"Wills\",\"id\":100011,\"address\":\"3742 White Oak Drive, Weston, Missouri\"}"));
     }
