@@ -32,6 +32,8 @@ public class TestResultLoggerExtension implements TestWatcher, AfterAllCallback 
     @Override
     public void testSuccessful(ExtensionContext context) {
         testResultsStatus.add(TestResultStatus.SUCCESSFUL);
+
+        System.out.println(context.getDisplayName() + " | Passed");
     }
 
     @Override
