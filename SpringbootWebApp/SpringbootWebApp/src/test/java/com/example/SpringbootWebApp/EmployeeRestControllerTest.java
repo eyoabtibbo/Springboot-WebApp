@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import org.springframework.test.web.servlet.MockMvc;
@@ -21,6 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(SpringExtension.class)
+@ExtendWith(TestResultLoggerExtension.class)
 class EmployeeRestControllerTest {
 
     private static MockMvc mockMvc;
@@ -29,17 +29,17 @@ class EmployeeRestControllerTest {
 
 
     @BeforeAll
-    public void setUp() throws Exception {
+    public void setUp(){
         //this creates a mock of employeeRestController
         mockMvc = MockMvcBuilders.standaloneSetup(employeeRestController)
                 .build();
     }
 
     @Test
-    public void testSuccessEmployeeWithId() throws Exception {
-        mockMvc.perform(get("/employee/listEmployees/100011"))
-                .andExpect(status().isOk())
-                .andExpect(content().json("{\"firstName\":\"Bobby\",\"lastName\":\"Wills\",\"id\":100011,\"address\":\"3742 White Oak Drive, Weston, Missouri\"}"));
+    public void testSuccessEmployeeWithId() throws Exception{
+            mockMvc.perform(get("/employee/listEmployees/100011"))
+                    .andExpect(status().isOk())
+                    .andExpect(content().json("{\"firstName\":\"Bobby\",\"lastName\":\"Wills\",\"id\":100011,\"address\":\"3742 White Oak Drive, Weston, Missouri\"}"));
     }
     @Test
     public void testSuccessEmployeeWithFirstName() throws Exception {
