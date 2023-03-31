@@ -16,7 +16,7 @@ public class customErrorController implements ErrorController {
 
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 
-        if (status != null ) {
+        if (status != null && Integer.valueOf(status.toString()) == HttpStatus.NOT_FOUND.value()) {
             return "404";
         }
         return "error";
