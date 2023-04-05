@@ -54,14 +54,14 @@ public class EmployeeRestController {
    }
 
 
-public Employee getEmployeeId (int id) {
-    for(int i=0; i<employees.length ;i++) {
-        if (employees[i].getId()==id) {
-            return employees[i];
+    public Employee getEmployeeId (int id) {
+        for(int i=0; i<employees.length ;i++) {
+            if (employees[i].getId()==id) {
+                return employees[i];
+            }
         }
-    }
-    return null;
-};
+        return null;
+    };
     public Employee getEmployeeByFirstName (String name) {
         for(int i=0; i<employees.length ;i++) {
             if ((employees[i].getFirstName()).equals(name)) {
@@ -92,38 +92,52 @@ public Employee getEmployeeId (int id) {
         return employees;
 
     }
+
     @GetMapping("/listEmployees/{id}")
-    public Employee listEmployeesId(@PathVariable int id, HttpServletResponse response) {
-        Employee retrievedEmployee = getEmployeeId(id);
+    public Employee listEmployeesId(@PathVariable String id, HttpServletResponse response) throws  Exception{
+
+        try{
+            int parsedString=Integer.parseInt(id);
+        }
+        catch (Exception e){
+            response.sendRedirect("/");
+            return  null;
+        }
+        int parsedString=Integer.parseInt(id);
+        Employee retrievedEmployee = getEmployeeId(parsedString);
         if(retrievedEmployee == null){
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.sendRedirect("/");
+            return  null;
         }
         return retrievedEmployee;
     }
+
     @GetMapping("/listEmployees/firstname={firstName}")
-    public Employee listEmployeesFirstName(@PathVariable String firstName, HttpServletResponse response) {
+    public Employee listEmployeesFirstName(@PathVariable String firstName, HttpServletResponse response) throws Exception {
         Employee retrievedEmployee = getEmployeeByFirstName(firstName);
         if(retrievedEmployee == null){
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.sendRedirect("/");
+            return null;
         }
         return retrievedEmployee;
     }
 
     @GetMapping("/listEmployees/lastname={lastName}")
-    public Employee listEmployeesLastName(@PathVariable String lastName, HttpServletResponse response) {
+    public Employee listEmployeesLastName(@PathVariable String lastName, HttpServletResponse response) throws Exception{
         Employee retrievedEmployee = getEmployeeByLastName(lastName);
         if(retrievedEmployee == null){
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.sendRedirect("/");
+            return null;
         }
         return retrievedEmployee;
     }
     @GetMapping("/listEmployees/address")
-    public Employee listEmployeesAddress(@PathVariable String address, HttpServletResponse response) {
+    public Employee listEmployeesAddress(@PathVariable String address, HttpServletResponse response) throws Exception{
         Employee retrievedEmployee = getEmployeeByAddress(address);
         if(retrievedEmployee == null){
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.sendRedirect("/");
+            return null;
         }
         return retrievedEmployee;
     }
-
 }
