@@ -2,23 +2,56 @@ package com.example.SpringbootWebApp;
 
 
 import jakarta.servlet.http.HttpServletResponse;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.json.simple.JSONArray;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/employee")
 public class EmployeeRestController {
 
-   public static Employee[] employees =  {
-            new Employee("Bobby", "Wills",100011, "3742 White Oak Drive, Weston, Missouri"),
-            new Employee("Rob", "Moore", 200022, "44597 A Avenue, Edmonton, Alberta"),
-            new Employee("Mack","Mckinney", 200023, " 2659 boulevard des Laurentides, La Tuque, Quebec"),
-            new Employee("Jay", "York",400045, " 754 Birkett Lane, Brantford, Ontario"),
-            new Employee("Smith","Jennings", 500053, "1033 Weir Crescent, Toronto, Ontario"),
-            new Employee("Greg", "Larson",100083, "825 rue Saint-Charles, Longueuil, Quebec"),
-    };
+
+   public static Employee[] employees;
+
+    static {
+        try {
+            employees = readFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Employee[] readFile () throws IOException, ParseException {
+       JSONParser parser = new JSONParser();
+       JSONArray reader = (JSONArray) parser.parse(new FileReader("Data.json"));
+       ArrayList<Employee> allEmployees = new ArrayList<>();
+       Employee[] employeeArray = new Employee[((int)reader.stream().count())];
+       for (Object o : reader) {
+           JSONObject employee = (JSONObject) o;
+
+           String firstName = (String) employee.get("firstName");
+           String lastName = (String) employee.get("lastName");
+           long idl = (long) employee.get("id");
+           int id = (int)idl;
+           String address = (String) employee.get("address");
+
+           allEmployees.add(new Employee(firstName, lastName, id, address));
+
+       }
+       allEmployees.toArray(employeeArray);
+       return employeeArray;
+   }
 
 
 public Employee getEmployeeId (int id) {
