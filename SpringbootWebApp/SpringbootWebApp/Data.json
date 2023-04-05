@@ -1,0 +1,38 @@
+[
+  {
+    "firstName": "Bobby",
+    "lastName": "Wills",
+    "id": 100011,
+    "address": "3742 White Oak Drive, Weston, Missouri"
+  },
+  {
+    "firstName": "Rob",
+    "lastName": "Moore",
+    "id": 200022,
+    "address": "44597 A Avenue, Edmonton, Alberta"
+  },
+  {
+    "firstName": "Mack",
+    "lastName": "Mckinney",
+    "id": 200023,
+    "address": " 2659 boulevard des Laurentides, La Tuque, Quebec"
+  },
+  {
+    "firstName": "Jay",
+    "lastName": "York",
+    "id": 400045,
+    "address": " 754 Birkett Lane, Brantford, Ontario"
+  },
+  {
+    "firstName": "Smith",
+    "lastName": "Jennings",
+    "id": 500053,
+    "address": "1033 Weir Crescent, Toronto, Ontario"
+  },
+  {
+    "firstName": "Greg",
+    "lastName": "Larson",
+    "id": 100083,
+    "address": "825 rue Saint-Charles, Longueuil, Quebec"
+  }
+]
